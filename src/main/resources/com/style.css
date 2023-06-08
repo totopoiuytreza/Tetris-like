@@ -1,3 +1,7 @@
 .split-pane > .split-pane-divider {
     -fx-background-color: transparent;
 }
+
+#containerright {
+    -fx-background-color: #c7c7c7;
+}
