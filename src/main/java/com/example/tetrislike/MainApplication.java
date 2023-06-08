@@ -10,7 +10,7 @@ import java.io.IOException;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("TEST.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
         stage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/images/logo.png"));
         stage.setTitle("Tetris Like Game");
