@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 
 import java.util.*;
 
-final class Block extends Group implements Cloneable {
+public final class Block extends Group implements Cloneable {
 
     private static final Random RANDOM = new Random();
 
