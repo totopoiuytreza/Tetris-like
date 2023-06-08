@@ -1,4 +1,4 @@
-package com.example.tetrislike.gui;
+package com.example.tetrislike;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
