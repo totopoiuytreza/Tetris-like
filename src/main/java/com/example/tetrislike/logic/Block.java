@@ -51,6 +51,34 @@ final class Block extends Group implements Cloneable {
             {0, 0, 0}
     }, Color.ORANGERED);
 
+    private static final BlockDefinition[] BLOCKS = {I, J, L, O, S, T, Z};
+    private int[][] matrix;
+    private BlockDefinition blockDefinition;
+    private Color color;
+
+
+    public Block() {
+        setRandomBlock();
+    }
+
+    public Block(BlockDefinition blockDefinition) {
+        setBlock(blockDefinition);
+    }
+
+    public void setBlock(BlockDefinition blockDefinition) {
+        this.matrix = blockDefinition.matrix;
+        this.color = blockDefinition.color;
+    }
+
+    public void setRandomBlock() {
+        // Random choice in BlockDefinition array
+        BlockDefinition blockDefinition = BLOCKS[RANDOM.nextInt(BLOCKS.length)];
+        this.matrix = blockDefinition.matrix;
+        this.color = blockDefinition.color;
+    }
+
+
+
     private static class BlockDefinition {
         private final int[][] matrix;
         private final Color color;
