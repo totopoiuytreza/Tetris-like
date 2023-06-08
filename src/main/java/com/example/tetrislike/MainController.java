@@ -5,10 +5,12 @@ import javafx.scene.control.Label;
 
 public class MainController {
     @FXML
-    private Label welcomeText;
+    private Label scoreLabel;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+
+    public void setScoreLabel(String score) {
+        scoreLabel.setText(score);
     }
+
+
 }
