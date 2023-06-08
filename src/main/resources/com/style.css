@@ -5,3 +5,11 @@
 #containerright {
     -fx-background-color: #c7c7c7;
 }
+
+#containerleft {
+    -fx-background-color: #5f5f5f;
+}
+
+#GameScreen {
+    -fx-background-color: white;
+}
