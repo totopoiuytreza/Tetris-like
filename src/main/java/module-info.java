@@ -5,4 +5,6 @@ module com.example.tetrislike {
                             
     opens com.example.tetrislike to javafx.fxml;
     exports com.example.tetrislike;
+    exports com.example.tetrislike.gui;
+    opens com.example.tetrislike.gui to javafx.fxml;
 }

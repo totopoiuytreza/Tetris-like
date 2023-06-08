@@ -1,4 +1,4 @@
-package com.example.tetrislike;
+package com.example.tetrislike.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
