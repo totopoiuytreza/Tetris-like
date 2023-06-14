@@ -8,6 +8,8 @@ import java.util.*;
 public final class Block extends Group implements Cloneable {
 
     private static final Random RANDOM = new Random();
+    private int previous_x;
+    private int previous_y;
 
     private static final BlockDefinition I = new BlockDefinition(new int[][]{
             {0, 0, 0, 0},
@@ -59,6 +61,8 @@ public final class Block extends Group implements Cloneable {
 
     public Block() {
         setRandomBlock();
+        previous_x = 0;
+        previous_y = 0;
     }
 
     public Block(BlockDefinition blockDefinition) {
@@ -77,6 +81,55 @@ public final class Block extends Group implements Cloneable {
         this.color = blockDefinition.color;
     }
 
+    public int[][] getMatrix(){
+        return matrix;
+    }
+
+    public Color getColor(){
+        return color;
+    }
+
+    public void setPreviousX(int x){
+        previous_x = x;
+    }
+
+    public int getPrevious_x(){
+        return previous_x;
+    }
+
+    public void setPreviousY(int y){
+        previous_y = y;
+    }
+
+    public int getPrevious_y(){
+        return previous_y;
+    }
+
+    public void rotateR(){
+        // Rotate Block Right to Matrix area
+        int[][] rotatedBlockMatrix = new int[matrix[0].length][matrix.length];
+
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                rotatedBlockMatrix[j][matrix.length - 1 - i] = matrix[i][j];
+            }
+        }
+
+        matrix = rotatedBlockMatrix;
+    }
+
+    public void rotateL(){
+        // Rotate Block Left to Matrix area
+        int[][] rotatedBlockMatrix = new int[matrix[0].length][matrix.length];
+
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[i].length; j++){
+                rotatedBlockMatrix[matrix.length - 1 - j][i] = matrix[i][j];
+            }
+        }
+
+        matrix = rotatedBlockMatrix;
+    }
 
 
     private static class BlockDefinition {
