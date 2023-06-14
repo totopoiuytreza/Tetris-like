@@ -5,12 +5,12 @@ import javafx.animation.TranslateTransition;
 public class GameArea {
     int height = 20;
     int width = 12;
-    int[][] area = new int[height][width];
+    String[][] area = new String[height][width];
 
     public GameArea(){
         for(int i = 0; i < height; i++){
             for(int j = 0; j < width; j++){
-                area[i][j] = 0;
+                area[i][j] = "0";
             }
         }
     }
@@ -22,7 +22,7 @@ public class GameArea {
         for(int i = 0; i < blockMatrix.length; i++){
             for(int j = 0; j < blockMatrix[i].length; j++){
                 if(blockMatrix[i][j] == 1){
-                    area[i][j] = 1;
+                    area[i][j] = "1";
                 }
             }
         }
@@ -64,7 +64,7 @@ public class GameArea {
         for(int i = 0; i < blockMatrix.length; i++){
             for(int j = 0; j < blockMatrix[i].length; j++){
                 if(blockMatrix[i][j] == 1){
-                    area[previous_x + i + x][j] = 1;
+                    area[previous_x + i + x][j] = "1";
                 }
             }
         }
@@ -130,7 +130,7 @@ public class GameArea {
         for(int i = 0; i < blockMatrix.length; i++){
             for(int j = 0; j < blockMatrix[i].length; j++){
                 if(blockMatrix[i][j] == 1){
-                    area[previous_x + i][previous_y + j] = 1;
+                    area[previous_x + i][previous_y + j] = "1";
                 }
             }
         }
@@ -145,7 +145,7 @@ public class GameArea {
         for(int i = 0; i < blockMatrix.length; i++){
             for(int j = 0; j < blockMatrix[i].length; j++){
                 if(blockMatrix[i][j] == 1){
-                    area[previous_x + i][previous_y + j] = 0;
+                    area[previous_x + i][previous_y + j] = "0";
                 }
             }
         }
