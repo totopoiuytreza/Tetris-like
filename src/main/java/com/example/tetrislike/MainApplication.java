@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import com.example.tetrislike.logic.*;
 
 import java.io.IOException;
 
@@ -16,6 +17,15 @@ public class MainApplication extends Application {
         stage.setTitle("Tetris Like Game");
         stage.setResizable(false);
         stage.setFullScreen(false);
+        //fermer le programme quand on ferme la fenetre
+        stage.setOnCloseRequest(e -> System.exit(0));
+        GameArea gameArea = new GameArea();
+        gameArea.displayArea();
+
+        //affiche gameArea dans la zone anchorPane GameScreen
+        MainController mainController = fxmlLoader.getController();
+        mainController.setGameArea(gameArea);
+
 
         stage.setScene(scene);
         stage.show();

@@ -1,11 +1,13 @@
 package com.example.tetrislike;
 import com.example.tetrislike.logic.Block;
+import com.example.tetrislike.logic.GameArea;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class MainController {
     private boolean isPaused = false;
@@ -50,6 +52,24 @@ public class MainController {
 
     public void setScoreLabel(String score) {
         scoreLabel.setText(score);
+    }
+
+    @FXML
+    public void setGameArea(GameArea gameArea) {
+
+        for (int i = 0; i < gameArea.height; i++) {
+            for (int j = 0; j < gameArea.width; j++) {
+                Rectangle rectangle = new Rectangle();
+                rectangle.setHeight(40);
+                rectangle.setWidth(40);
+                rectangle.setFill(javafx.scene.paint.Color.WHITE);
+                rectangle.setStroke(javafx.scene.paint.Color.BLACK);
+                rectangle.setStrokeWidth(1);
+                AnchorPane.setTopAnchor(rectangle, i * 37.0);
+                AnchorPane.setLeftAnchor(rectangle, j * 37.0);
+                gamePane.getChildren().add(rectangle);
+            }
+        }
     }
 
 
