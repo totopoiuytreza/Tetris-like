@@ -17,8 +17,7 @@ public class GameLogic {
         return gameArea;
     }
 
-    public void setGameArea(GameArea gameArea) {
-        this.gameArea = gameArea;
+    public void setGameArea(GameArea gameArea) {this.gameArea = gameArea;
     }
 
     public Block getBlock() {
@@ -28,4 +27,5 @@ public class GameLogic {
     public void setBlock(Block block) {
         this.block = block;
     }
+
 }

@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:controller="com.example.tetrislike.MainController"  dividerPositions="0.65" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.65" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tetrislike.MainController">
     <stylesheets>
         <URL value="@../../style.css" />
     </stylesheets>
     <items>
     <AnchorPane id="containerleft" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <AnchorPane fx:id="gamePane" id="GameScreen" layoutX="11.0" layoutY="14.0" prefHeight="769.0" prefWidth="493.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            <AnchorPane id="GameScreen" fx:id="gamePane" layoutX="11.0" layoutY="14.0" prefHeight="740.0" prefWidth="444.0" AnchorPane.leftAnchor="19.0" AnchorPane.topAnchor="18.0" />
          </children></AnchorPane>
     <AnchorPane id="containerright" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -35,8 +35,8 @@
                   <AnchorPane layoutX="14.0" layoutY="43.0" prefHeight="97.0" prefWidth="107.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="35.0" />
                </children>
             </AnchorPane>
-            <Button fx:id="testButton" layoutX="100.0" layoutY="408.0" prefHeight="45.0" prefWidth="75.0" text="TEST" onAction="#onTestButtonClick"/>
-            <Button fx:id="pauseButton" layoutX="100.0" layoutY="533.0" prefHeight="58.0" prefWidth="75.0" text="Pause" onAction ="#onPauseButtonClick"/>
+            <Button fx:id="testButton" layoutX="100.0" layoutY="408.0" onAction="#onTestButtonClick" prefHeight="45.0" prefWidth="75.0" text="TEST" />
+            <Button fx:id="pauseButton" layoutX="100.0" layoutY="533.0" onAction="#onPauseButtonClick" prefHeight="58.0" prefWidth="75.0" text="Pause" />
          </children></AnchorPane>
   </items>
    <cursor>
