@@ -27,10 +27,6 @@ public class MainApplication extends Application {
         stage.setOnCloseRequest(e -> System.exit(0));
         GameArea gameArea = new GameArea();
 
-
-
-        System.out.println(gameArea.toString());
-
         //affiche gameArea dans la zone anchorPane GameScreen
         MainController mainController = fxmlLoader.getController();
         mainController.setGameArea(gameArea);
@@ -38,20 +34,18 @@ public class MainApplication extends Application {
 
         //executer la fonction afficher_matrice() à chaque fois que la matrice est modifiée
 
-       ;
-
-
-
         GameLogic gameLogic = new GameLogic();
         gameLogic.setGameArea(gameArea);
         Block block = new Block();
         gameLogic.setBlock(block);
         gameLogic.addBlockToArea();
 
+        gameLogic.getGameArea().movementBlock(block, "down");
+        System.out.println(gameLogic.getGameArea());
+
+
         AnimationTimer timer = new Timer(gameArea, gameLogic ,mainController);
         timer.start();
-
-        System.out.println(gameArea.toString());
 
         stage.setScene(scene);
         stage.show();
@@ -62,10 +56,10 @@ public class MainApplication extends Application {
         blockMatrix.clear(); // Effacer l'ancienne matrice
 
 
-// Convertir la matrice en une liste de tableaux de chaînes de caractères
+        // Convertir la matrice en une liste de tableaux de chaînes de caractères
         List<String[]> matrixList = Arrays.asList(newMatrix);
 
-// Ajouter la liste à l'ObservableList
+        // Ajouter la liste à l'ObservableList
         blockMatrix.addAll(matrixList);
     }
 
@@ -90,7 +84,7 @@ public class MainApplication extends Application {
                 lastUpdate = now;
                 System.out.println("Update");
                 //Afficher la matrice et mise à jour de la matrice
-                gameLogic.addBlockToArea();
+                //gameLogic.addBlockToArea();
                 mainController.affichage_matrice(gameArea);
 
             }

@@ -10,48 +10,53 @@ public final class Block extends Group implements Cloneable {
     private static final Random RANDOM = new Random();
     private int previous_x;
     private int previous_y;
-
+    private boolean touchedBottom = false;
+    private boolean canRight = true;
+    private boolean canLeft = true;
+    private boolean canRotateL = true;
+    private boolean canRotateR = true;
+    private String color_name;
     private static final BlockDefinition I = new BlockDefinition(new int[][]{
             {0, 0, 0, 0},
             {1, 1, 1, 1},
             {0, 0, 0, 0},
             {0, 0, 0, 0}
-    }, Color.CYAN);
+    }, Color.CYAN, "C");
 
     private static final BlockDefinition J = new BlockDefinition(new int[][]{
             {1, 0, 0},
             {1, 1, 1},
             {0, 0, 0}
-    }, Color.BLUE);
+    }, Color.BLUE, "B");
 
     private static final BlockDefinition L = new BlockDefinition(new int[][]{
             {0, 0, 1},
             {1, 1, 1},
             {0, 0, 0}
-    }, Color.ORANGE);
+    }, Color.ORANGE, "O");
 
     private static final BlockDefinition O = new BlockDefinition(new int[][]{
             {1, 1},
             {1, 1}
-    }, Color.YELLOW);
+    }, Color.YELLOW, "Y");
 
     private static final BlockDefinition S = new BlockDefinition(new int[][]{
             {0, 1, 1},
             {1, 1, 0},
             {0, 0, 0}
-    }, Color.GREENYELLOW);
+    }, Color.GREENYELLOW, "G");
 
     private static final BlockDefinition T = new BlockDefinition(new int[][]{
             {0, 1, 0},
             {1, 1, 1},
             {0, 0, 0}
-    }, Color.PURPLE);
+    }, Color.PURPLE, "P");
 
     private static final BlockDefinition Z = new BlockDefinition(new int[][]{
             {1, 1, 0},
             {0, 1, 1},
             {0, 0, 0}
-    }, Color.ORANGERED);
+    }, Color.ORANGERED, "R");
 
     private static final BlockDefinition[] BLOCKS = {I, J, L, O, S, T, Z};
     private int[][] matrix;
@@ -61,17 +66,45 @@ public final class Block extends Group implements Cloneable {
 
     public Block() {
         setRandomBlock();
+
         previous_x = 0;
         previous_y = 0;
     }
 
-    public Block(BlockDefinition blockDefinition) {
-        setBlock(blockDefinition);
+    public Block(String blockName) {
+        switch (blockName){
+            case "I":
+                setBlock(I);
+                break;
+            case "J":
+                setBlock(J);
+                break;
+            case "L":
+                setBlock(L);
+                break;
+            case "O":
+                setBlock(O);
+                break;
+            case "S":
+                setBlock(S);
+                break;
+            case "T":
+                setBlock(T);
+                break;
+            case "Z":
+                setBlock(Z);
+                break;
+            default:
+                setRandomBlock();
+                break;
+        }
+
     }
 
     public void setBlock(BlockDefinition blockDefinition) {
         this.matrix = blockDefinition.matrix;
         this.color = blockDefinition.color;
+        this.color_name = blockDefinition.color_name;
     }
 
     public void setRandomBlock() {
@@ -79,6 +112,7 @@ public final class Block extends Group implements Cloneable {
         BlockDefinition blockDefinition = BLOCKS[RANDOM.nextInt(BLOCKS.length)];
         this.matrix = blockDefinition.matrix;
         this.color = blockDefinition.color;
+        this.color_name = blockDefinition.color_name;
     }
 
     public int[][] getMatrix(){
@@ -104,6 +138,50 @@ public final class Block extends Group implements Cloneable {
     public int getPrevious_y(){
         return previous_y;
     }
+
+    public void setTouchedBottom(boolean touchedBottom){
+        this.touchedBottom = touchedBottom;
+    }
+
+    public boolean getTouchedBottom(){
+        return touchedBottom;
+    }
+
+    public void setCanRight(boolean canRight){
+        this.canRight = canRight;
+    }
+
+    public boolean getCanRight(){
+        return canRight;
+    }
+
+    public void setCanLeft(boolean canLeft){
+        this.canLeft = canLeft;
+    }
+
+    public boolean getCanLeft(){
+        return canLeft;
+    }
+
+    public void setCanRotateR(boolean canRotateR){
+        this.canRotateR = canRotateR;
+    }
+
+    public boolean getCanRotateR(){
+        return canRotateR;
+    }
+    public void setCanRotateL(boolean canRotateL){
+        this.canRotateL = canRotateL;
+    }
+    public boolean getCanRotateL(){
+        return canRotateL;
+    }
+
+    public String getColor_name(){
+        return color_name;
+    }
+
+
 
     public void rotateR(){
         // Rotate Block Right to Matrix area
@@ -135,10 +213,12 @@ public final class Block extends Group implements Cloneable {
     private static class BlockDefinition {
         private final int[][] matrix;
         private final Color color;
+        private final String color_name;
 
-        private BlockDefinition(int[][] matrix, Color color) {
+        private BlockDefinition(int[][] matrix, Color color, String color_name) {
             this.matrix = matrix;
             this.color = color;
+            this.color_name = color_name;
         }
     }
 }

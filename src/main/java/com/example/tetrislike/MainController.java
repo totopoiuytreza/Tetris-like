@@ -1,6 +1,6 @@
 package com.example.tetrislike;
-import com.example.tetrislike.logic.Block;
-import com.example.tetrislike.logic.GameArea;
+import com.example.tetrislike.logic.*;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -79,7 +79,7 @@ public class MainController {
         System.out.println("Affichage de la matrice sur le gamePane");
         for (int i = 0; i < gameArea.height; i++) {
             for (int j = 0; j < gameArea.width; j++) {
-                if (gameArea.getArea()[i][j] == "1") {
+                if (gameArea.getArea()[i][j] != "0") {
                     Rectangle rectangle = new Rectangle();
                     rectangle.setHeight(40);
                     rectangle.setWidth(40);
