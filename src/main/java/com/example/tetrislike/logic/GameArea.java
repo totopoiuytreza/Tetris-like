@@ -30,28 +30,16 @@ public class GameArea {
     }
 
     public void movementBlock(Block block, String move){
-        try{
-            switch(move){
-                case "down":
-                    if(!block.getTouchedBottom()){
-                        moveDownBlock(block, 1);
-                    }
-                    break;
-                case "right":
-                    moveRightBlock(block);
-                    break;
-                case "left":
-                    moveLeftBlock(block);
-                    break;
-                case "rotateR":
-                    rotateRBlock(block);
-                    break;
-                case "rotateL":
-                    rotateLBlock(block);
-                    break;
+        switch (move) {
+            case "down" -> {
+                if (!block.getTouchedBottom()) {
+                    moveDownBlock(block, 1);
+                }
             }
-        } catch (Exception e){
-            System.out.println("Movement not possible");
+            case "right" -> moveRightBlock(block);
+            case "left" -> moveLeftBlock(block);
+            case "rotateR" -> rotateRBlock(block);
+            case "rotateL" -> rotateLBlock(block);
         }
     }
 
@@ -66,7 +54,7 @@ public class GameArea {
 
         int positionYonGameArea = getBottomOfBlock(block);
         // Check if bottom of Block is touching bottom of Matrix area
-        if(positionYonGameArea  == height){
+        if(positionYonGameArea == height){
             block.setTouchedBottom(true);
         }
     }
@@ -85,12 +73,17 @@ public class GameArea {
                     }
                 }
                 else{
-                    // Check where Block Matrix bottoms are touching other Blocks
-                    if(block.getMatrix()[block.getMatrix().length - 1][j] == 1){
-                        if(!area[positionYonGameArea][block.getPrevious_y() + j].equals("0")){
-                            block.setTouchedBottom(true);
+                    // Check all uppers of Block if they are touching something else than 0
+
+                    for(int i = 0; i < block.getMatrix().length; i++){
+                        if(area[block.getPrevious_x() + i][block.getPrevious_y() + j].equals(block.getColor_name())){
+                            if(!area[block.getPrevious_x() + i - 1][block.getPrevious_y() + j].equals("0")){
+                                block.setTouchedBottom(true);
+                            }
                         }
                     }
+
+
                 }
             }
 
@@ -152,24 +145,32 @@ public class GameArea {
     }
 
     public void moveDownBlock(Block block, int x){
-        // Move Block to Matrix area
-        int[][] blockMatrix = block.getMatrix();
-        int previous_x = block.getPrevious_x();
-        int previous_y = block.getPrevious_y();
-        String color_name = block.getColor_name();
+        try{
+            // Move Block to Matrix area
+            int[][] blockMatrix = block.getMatrix();
+            int previous_x = block.getPrevious_x();
+            int previous_y = block.getPrevious_y();
+            String color_name = block.getColor_name();
 
-        // Clear Block from Matrix area
-        clearBlock(block);
+            // Clear Block from Matrix area
+            clearBlock(block);
 
-        // Move Block to Matrix area
-        for(int i = 0; i < blockMatrix.length; i++){
-            for(int j = 0; j < blockMatrix[i].length; j++){
-                if(blockMatrix[i][j] == 1){
-                    area[previous_x + i + x][previous_y + j] = color_name;
+            // Move Block to Matrix area
+            for(int i = 0; i < blockMatrix.length; i++){
+                for(int j = 0; j < blockMatrix[i].length; j++){
+                    if(blockMatrix[i][j] == 1){
+                        area[previous_x + i + x][previous_y + j] = color_name;
+                    }
                 }
             }
+            block.setPreviousX(block.getPrevious_x() + 1);
+        } catch (Exception e){
+            System.out.println("Movement not possible");
+            clearBlock(block);
+            placeBlock(block);
+
         }
-        block.setPreviousX(block.getPrevious_x() + 1);
+
     }
 
 
