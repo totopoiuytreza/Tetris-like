@@ -84,7 +84,22 @@ public class MainController {
                     Rectangle rectangle = new Rectangle();
                     rectangle.setHeight(40);
                     rectangle.setWidth(40);
-                    rectangle.setFill(javafx.scene.paint.Color.BLACK);
+                    //affichage de la couleur
+                    switch (gameArea.getArea()[i][j]) {
+                        case "R" -> rectangle.setFill(javafx.scene.paint.Color.RED);
+                        case "B" -> rectangle.setFill(javafx.scene.paint.Color.BLUE);
+                        case "G" -> rectangle.setFill(javafx.scene.paint.Color.GREEN);
+                        case "Y" -> rectangle.setFill(javafx.scene.paint.Color.YELLOW);
+                        case "P" -> rectangle.setFill(javafx.scene.paint.Color.PURPLE);
+                        case "O" -> rectangle.setFill(javafx.scene.paint.Color.ORANGE);
+                        case "Pin" -> rectangle.setFill(javafx.scene.paint.Color.PINK);
+                        case "Grey" -> rectangle.setFill(javafx.scene.paint.Color.GREY);
+                        case "C" -> rectangle.setFill(javafx.scene.paint.Color.CYAN);
+                        case "Brown" -> rectangle.setFill(javafx.scene.paint.Color.BROWN);
+                        case "Black" -> rectangle.setFill(javafx.scene.paint.Color.BLACK);
+                        default -> rectangle.setFill(javafx.scene.paint.Color.WHITE);
+                    }
+                    //rectangle.setFill(javafx.scene.paint.Color.BLACK);
                     rectangle.setStroke(javafx.scene.paint.Color.BLACK);
                     rectangle.setStrokeWidth(1);
                     AnchorPane.setTopAnchor(rectangle, i * 37.0);
