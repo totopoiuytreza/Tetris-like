@@ -1,12 +1,18 @@
 package com.example.tetrislike;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.example.tetrislike.logic.*;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainApplication extends Application {
     @Override
@@ -20,17 +26,75 @@ public class MainApplication extends Application {
         //fermer le programme quand on ferme la fenetre
         stage.setOnCloseRequest(e -> System.exit(0));
         GameArea gameArea = new GameArea();
-        gameArea.displayArea();
+
+
+
+        System.out.println(gameArea.toString());
 
         //affiche gameArea dans la zone anchorPane GameScreen
         MainController mainController = fxmlLoader.getController();
         mainController.setGameArea(gameArea);
 
 
+        //executer la fonction afficher_matrice() à chaque fois que la matrice est modifiée
+
+       ;
+
+
+
+        GameLogic gameLogic = new GameLogic();
+        gameLogic.setGameArea(gameArea);
+        Block block = new Block();
+        gameLogic.setBlock(block);
+        gameLogic.addBlockToArea();
+
+        AnimationTimer timer = new Timer(gameArea, gameLogic ,mainController);
+        timer.start();
+
+        System.out.println(gameArea.toString());
+
         stage.setScene(scene);
         stage.show();
 
+    }
+    private void updateBlockMatrix(ObservableList<String[]> blockMatrix,String[][] newMatrix) {
+        System.out.println("updateBlockMatrix");
+        blockMatrix.clear(); // Effacer l'ancienne matrice
 
+
+// Convertir la matrice en une liste de tableaux de chaînes de caractères
+        List<String[]> matrixList = Arrays.asList(newMatrix);
+
+// Ajouter la liste à l'ObservableList
+        blockMatrix.addAll(matrixList);
+    }
+
+    private class Timer extends AnimationTimer {
+        private GameArea gameArea = new GameArea();
+        private GameLogic gameLogic = new GameLogic();
+        private MainController mainController = new MainController();
+
+        private long lastUpdate = 0;
+
+        public Timer(GameArea area, GameLogic logic, MainController mainController) {
+            super();
+            this.gameArea = area;
+            this.gameLogic = logic;
+            this.mainController = mainController;
+        }
+
+        @Override
+        public void handle(long now) {
+            if (now - lastUpdate >= 1000000000) {
+                // Mettre à jour le jeu ici
+                lastUpdate = now;
+                System.out.println("Update");
+                //Afficher la matrice et mise à jour de la matrice
+                gameLogic.addBlockToArea();
+                mainController.affichage_matrice(gameArea);
+
+            }
+        }
     }
 
     public static void main(String[] args) {

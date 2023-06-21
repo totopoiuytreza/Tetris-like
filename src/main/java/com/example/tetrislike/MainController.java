@@ -57,17 +57,39 @@ public class MainController {
     @FXML
     public void setGameArea(GameArea gameArea) {
 
+
         for (int i = 0; i < gameArea.height; i++) {
             for (int j = 0; j < gameArea.width; j++) {
                 Rectangle rectangle = new Rectangle();
-                rectangle.setHeight(40);
-                rectangle.setWidth(40);
+                rectangle.setHeight(37);
+                rectangle.setWidth(37);
                 rectangle.setFill(javafx.scene.paint.Color.WHITE);
                 rectangle.setStroke(javafx.scene.paint.Color.BLACK);
                 rectangle.setStrokeWidth(1);
                 AnchorPane.setTopAnchor(rectangle, i * 37.0);
                 AnchorPane.setLeftAnchor(rectangle, j * 37.0);
                 gamePane.getChildren().add(rectangle);
+            }
+        }
+    }
+
+    @FXML
+    public void affichage_matrice(GameArea gameArea) {
+        // Affichage de la matrice sur le gamePane
+        System.out.println("Affichage de la matrice sur le gamePane");
+        for (int i = 0; i < gameArea.height; i++) {
+            for (int j = 0; j < gameArea.width; j++) {
+                if (gameArea.getArea()[i][j] == "1") {
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.setHeight(40);
+                    rectangle.setWidth(40);
+                    rectangle.setFill(javafx.scene.paint.Color.BLACK);
+                    rectangle.setStroke(javafx.scene.paint.Color.BLACK);
+                    rectangle.setStrokeWidth(1);
+                    AnchorPane.setTopAnchor(rectangle, i * 37.0);
+                    AnchorPane.setLeftAnchor(rectangle, j * 37.0);
+                    gamePane.getChildren().add(rectangle);
+                }
             }
         }
     }
