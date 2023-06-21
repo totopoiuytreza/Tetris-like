@@ -168,6 +168,7 @@ public class GameArea {
             System.out.println("Movement not possible");
             clearBlock(block);
             placeBlock(block);
+            block.setTouchedBottom(true);
 
         }
 

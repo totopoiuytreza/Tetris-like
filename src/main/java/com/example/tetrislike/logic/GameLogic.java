@@ -29,8 +29,13 @@ public class GameLogic {
     }
 
     public void fall(){
+        gameArea.checkAll(block);
         if(!block.getTouchedBottom()){
             gameArea.movementBlock(block, "down");
+        }
+        else{
+            block = new Block();
+            addBlockToArea();
         }
     }
 

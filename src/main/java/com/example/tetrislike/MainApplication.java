@@ -90,7 +90,6 @@ public class MainApplication extends Application {
                 lastUpdate = now;
                 System.out.println("Update");
                 //Afficher la matrice et mise à jour de la matrice
-                //gameLogic.addBlockToArea();
                 gameLogic.fall();
                 mainController.affichage_matrice(gameArea);
 
