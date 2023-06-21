@@ -1,5 +1,8 @@
 package com.example.tetrislike.logic;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 public class GameLogic {
     private GameArea gameArea;
     private Block block;
@@ -36,6 +39,18 @@ public class GameLogic {
         else{
             block = new Block();
             addBlockToArea();
+        }
+    }
+
+    public void deplacement(KeyEvent e) {
+        KeyCode touche = e.getCode();
+
+        switch (touche) {
+            case D -> gameArea.movementBlock(block, "right");
+            case Q -> gameArea.movementBlock(block, "left");
+            case S -> gameArea.movementBlock(block, "down");
+            case E -> gameArea.movementBlock(block, "rotateR");
+            case A -> gameArea.movementBlock(block, "rotateL");
         }
     }
 

@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -74,6 +75,8 @@ public class MainApplication extends Application {
         private GameLogic gameLogic = new GameLogic();
         private MainController mainController = new MainController();
 
+        private EventHandler eventHandler;
+
         private long lastUpdate = 0;
 
         public Timer(GameArea area, GameLogic logic, MainController mainController) {
@@ -91,6 +94,10 @@ public class MainApplication extends Application {
                 System.out.println("Update");
                 //Afficher la matrice et mise à jour de la matrice
                 gameLogic.fall();
+                // Inputs keyboards using the function deplacement and creat the functionality of the KeyEvents
+                mainController.getScene().setOnKeyPressed(e -> gameLogic.deplacement(e));
+
+
                 mainController.affichage_matrice(gameArea);
 
             }
