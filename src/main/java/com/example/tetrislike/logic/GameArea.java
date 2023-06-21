@@ -55,6 +55,13 @@ public class GameArea {
         }
     }
 
+    public void checkAll(Block block){
+        checkTouchedBottom(block);
+        checkTouchedBlock(block);
+        checkCanRotateL(block);
+        checkCanRotateR(block);
+    }
+
     public void checkTouchedBottom(Block block){
 
         int positionYonGameArea = getBottomOfBlock(block);
