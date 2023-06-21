@@ -39,9 +39,15 @@ public class MainApplication extends Application {
         Block block = new Block();
         gameLogic.setBlock(block);
         gameLogic.addBlockToArea();
-
+        /*
+        for(int i = 0; i < 18; i++){
+            gameLogic.getGameArea().movementBlock(block, "down");
+            System.out.println(gameLogic.getGameArea());
+        }
         gameLogic.getGameArea().movementBlock(block, "down");
         System.out.println(gameLogic.getGameArea());
+        */
+
 
 
         AnimationTimer timer = new Timer(gameArea, gameLogic ,mainController);
@@ -85,6 +91,7 @@ public class MainApplication extends Application {
                 System.out.println("Update");
                 //Afficher la matrice et mise à jour de la matrice
                 //gameLogic.addBlockToArea();
+                gameLogic.fall();
                 mainController.affichage_matrice(gameArea);
 
             }

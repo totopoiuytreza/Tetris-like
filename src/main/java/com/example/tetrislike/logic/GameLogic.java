@@ -28,4 +28,10 @@ public class GameLogic {
         this.block = block;
     }
 
+    public void fall(){
+        if(!block.getTouchedBottom()){
+            gameArea.movementBlock(block, "down");
+        }
+    }
+
 }

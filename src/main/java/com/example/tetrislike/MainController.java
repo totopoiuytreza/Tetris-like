@@ -75,6 +75,7 @@ public class MainController {
 
     @FXML
     public void affichage_matrice(GameArea gameArea) {
+        gamePane.getChildren().clear();
         // Affichage de la matrice sur le gamePane
         System.out.println("Affichage de la matrice sur le gamePane");
         for (int i = 0; i < gameArea.height; i++) {
