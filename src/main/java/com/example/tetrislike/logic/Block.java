@@ -11,10 +11,6 @@ public final class Block extends Group implements Cloneable {
     private int previous_x;
     private int previous_y;
     private boolean touchedBottom = false;
-    private boolean canRight = true;
-    private boolean canLeft = true;
-    private boolean canRotateL = true;
-    private boolean canRotateR = true;
     private String color_name;
     private static final BlockDefinition I = new BlockDefinition(new int[][]{
             {0, 0, 0, 0},
@@ -147,35 +143,6 @@ public final class Block extends Group implements Cloneable {
         return touchedBottom;
     }
 
-    public void setCanRight(boolean canRight){
-        this.canRight = canRight;
-    }
-
-    public boolean getCanRight(){
-        return canRight;
-    }
-
-    public void setCanLeft(boolean canLeft){
-        this.canLeft = canLeft;
-    }
-
-    public boolean getCanLeft(){
-        return canLeft;
-    }
-
-    public void setCanRotateR(boolean canRotateR){
-        this.canRotateR = canRotateR;
-    }
-
-    public boolean getCanRotateR(){
-        return canRotateR;
-    }
-    public void setCanRotateL(boolean canRotateL){
-        this.canRotateL = canRotateL;
-    }
-    public boolean getCanRotateL(){
-        return canRotateL;
-    }
 
     public String getColor_name(){
         return color_name;
@@ -207,6 +174,22 @@ public final class Block extends Group implements Cloneable {
         }
 
         matrix = rotatedBlockMatrix;
+    }
+
+    public int[] getBottomRows(){
+        int[] bottoms = new int[matrix[0].length];
+
+        for(int i = 0; i < matrix[0].length; i++){
+            for(int j = matrix.length - 1; j >= 0; j--){
+                if(matrix[j][i] == 1){
+                    bottoms[i] = j;
+                    break;
+                }
+            }
+        }
+        // Print
+        System.out.println("Bottom Rows: " + Arrays.toString(bottoms));
+        return bottoms;
     }
 
 
