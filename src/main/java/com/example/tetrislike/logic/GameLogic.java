@@ -3,9 +3,12 @@ package com.example.tetrislike.logic;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.Arrays;
+
 public class GameLogic {
     private GameArea gameArea;
     private Block block;
+    private Block nextBlock;
 
     private boolean isPaused = false;
 
@@ -15,7 +18,8 @@ public class GameLogic {
 
     public GameLogic(){
         gameArea = new GameArea();
-        block = new Block();
+        block = new Block("I");
+        nextBlock = new Block("I");
     }
 
     public void addBlockToArea(){
@@ -36,6 +40,63 @@ public class GameLogic {
     public void setBlock(Block block) {
         this.block = block;
     }
+
+    public Block getNextBlock() {
+        return nextBlock;
+    }
+
+    public void setNextBlock(Block nextBlock) {
+        this.nextBlock = nextBlock;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+
+    public void clearLine(){
+        //Check if line is full
+        //If line is full, clear line
+        //If line is cleared, move all blocks above down by 1
+        //Repeat until no more lines are cleared
+        int scoreMultiplier = 0;
+        String[][] gameAreaMatrix = gameArea.getArea();
+
+        //For each line, check if line is full
+        for(int i = 0; i < gameAreaMatrix.length; i++){
+            boolean isLineFull = true;
+            for(int j = 0; j < gameAreaMatrix[i].length; j++){
+                if (gameAreaMatrix[i][j].equals("0")) {
+                    isLineFull = false;
+                    break;
+                }
+            }
+            //If line is full, clear line
+            if(isLineFull){
+                Arrays.fill(gameAreaMatrix[i], "0");
+                //Move all blocks above down by 1
+                for(int k = i; k > 0; k--){
+                    System.arraycopy(gameAreaMatrix[k - 1], 0, gameAreaMatrix[k], 0, gameAreaMatrix[k].length);
+                }
+                if(scoreMultiplier == 0)
+                    scoreMultiplier++;
+                else
+                    scoreMultiplier *= 3;
+            }
+
+        }
+        //Add score
+        score += 100 * scoreMultiplier;
+    }
+
 
     public void addBlock(){
         int [][] blockMatrix = block.getMatrix();
@@ -80,41 +141,93 @@ public class GameLogic {
     }
 
     public boolean checkCanRight(){
-        int[][] blockMatrix = block.getMatrix();
-        int previous_x = block.getPrevious_x();
-        int previous_y = block.getPrevious_y();
-        String color_name = block.getColor_name();
+        try{
+            int[][] blockMatrix = block.getMatrix();
+            int previous_x = block.getPrevious_x();
+            int previous_y = block.getPrevious_y();
+            String color_name = block.getColor_name();
 
-        String [][] gameAreaMatrix = gameArea.getArea();
+            String [][] gameAreaMatrix = gameArea.getArea();
 
-        // Check if right of Block is something else than 0
-        for(int i = 0; i < blockMatrix.length; i++){
-            if(!gameAreaMatrix[previous_x + i][previous_y + blockMatrix[i].length].equals("0")){
-                return false;
+            // Check if right of Block is something else than 0
+            for(int i = 0; i < blockMatrix.length; i++){
+                if(!gameAreaMatrix[previous_x + i][previous_y + blockMatrix[i].length].equals("0")){
+                    return false;
+                }
             }
+            return true;
+        } catch (Exception e){
+            if(e instanceof ArrayIndexOutOfBoundsException){
+                boolean isRightWall = false;
+                // Check if block is touching right wall of it's matrix
+                int[][] blockMatrix = block.getMatrix();
+                for(int i = 0; i < blockMatrix.length; i++){
+                    if(blockMatrix[i][blockMatrix[i].length - 1] == 1){
+                        isRightWall = true;
+                    }
+                }
+                // If block is touching right wall, return false
+                if(isRightWall){
+                    return false;
+                } else {
+                    for(int i = 0; i < blockMatrix.length; i++){
+                        if(blockMatrix[i][blockMatrix[i].length - 1] == 1){
+                            blockMatrix[i][blockMatrix[i].length - 1] = 0;
+                            blockMatrix[i][blockMatrix[i].length - 2] = 1;
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
-        return true;
+
     }
 
     public boolean checkCanLeft(){
-        int[][] blockMatrix = block.getMatrix();
-        int previous_x = block.getPrevious_x();
-        int previous_y = block.getPrevious_y();
-        String color_name = block.getColor_name();
+        try{
+            int[][] blockMatrix = block.getMatrix();
+            int previous_x = block.getPrevious_x();
+            int previous_y = block.getPrevious_y();
+            String color_name = block.getColor_name();
 
-        String [][] gameAreaMatrix = gameArea.getArea();
+            String [][] gameAreaMatrix = gameArea.getArea();
 
-        // Check if left of Block is something else than 0
-        for(int i = 0; i < blockMatrix.length; i++){
-            if(!gameAreaMatrix[previous_x + i][previous_y - 1].equals("0")){
-                return false;
+            // Check if left of Block is something else than 0
+            for(int i = 0; i < blockMatrix.length; i++){
+                if(!gameAreaMatrix[previous_x + i][previous_y - 1].equals("0")){
+                    return false;
+                }
             }
+            return true;
+        } catch (Exception e){
+            if(e instanceof ArrayIndexOutOfBoundsException){
+                boolean isLeftWall = false;
+                // Check if block is touching left wall of it's matrix
+                int[][] blockMatrix = block.getMatrix();
+                for(int i = 0; i < blockMatrix.length; i++){
+                    if(blockMatrix[i][0] == 1){
+                        isLeftWall = true;
+                    }
+                }
+                // If block is touching left wall, return false
+                if(isLeftWall){
+                    return false;
+                } else {
+                    for(int i = 0; i < blockMatrix.length; i++){
+                        if(blockMatrix[i][0] == 1){
+                            blockMatrix[i][0] = 0;
+                            blockMatrix[i][1] = 1;
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
-        return true;
     }
 
 
-    //TODO: Check if Block can rotate
     public boolean checkCanRotateR(){
         //Create rotated Block
         block.rotateR();
@@ -139,7 +252,6 @@ public class GameLogic {
         return true;
     }
 
-    //TODO Check if Block can rotate
     public boolean checkCanRotateL(){
         //Create rotated Block
         block.rotateL();
@@ -162,6 +274,12 @@ public class GameLogic {
         }
         block.rotateR();
         return true;
+    }
+
+    public void instantFall(){
+        while(!block.getTouchedBottom()){
+            moveDownBlock(1);
+        }
     }
 
 
@@ -331,22 +449,20 @@ public class GameLogic {
 
 
     public void movementBlock(String direction){
-        switch(direction){
-            case "down" -> {
-                if (!block.getTouchedBottom()) {
-                    moveDownBlock(1);
-                }
+        if(!block.getTouchedBottom()){
+            switch(direction){
+                case "down" -> moveDownBlock(1);
+
+                case "right" -> moveRightBlock();
+
+                case "left" -> moveLeftBlock();
+
+                case "rotateR" -> rotateRBlock();
+
+                case "rotateL" -> rotateLBlock();
             }
-            case "right" -> moveRightBlock();
-
-            case "left" -> moveLeftBlock();
-
-            case "rotateR" -> rotateRBlock();
-
-            case "rotateL" -> rotateLBlock();
-
-
         }
+
     }
 
     public void fall(){
@@ -355,7 +471,9 @@ public class GameLogic {
             movementBlock("down");
         }
         else{
-            block = new Block();
+            clearLine();
+            block = nextBlock;
+            nextBlock = new Block("I");
             addBlockToArea();
         }
     }
@@ -369,6 +487,7 @@ public class GameLogic {
             case S -> movementBlock("down");
             case E -> movementBlock("rotateR");
             case A -> movementBlock("rotateL");
+            case Z -> instantFall();
         }
     }
 

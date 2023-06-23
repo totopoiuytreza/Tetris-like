@@ -78,7 +78,6 @@ public class MainController {
     public void affichage_matrice(GameArea gameArea) {
         gamePane.getChildren().clear();
         // Affichage de la matrice sur le gamePane
-        System.out.println("Affichage de la matrice sur le gamePane");
         for (int i = 0; i < gameArea.height; i++) {
             for (int j = 0; j < gameArea.width; j++) {
                 if (gameArea.getArea()[i][j] != "0") {
@@ -114,6 +113,17 @@ public class MainController {
     public Scene getScene() {
         return gamePane.getScene();
     }
+
+    @FXML
+    public void setScoreLabel(int score){
+        scoreLabel.setText(String.valueOf(score));
+    }
+
+    // Get the state of the pause button
+    public boolean getIsPaused() {
+        return isPaused;
+    }
+
 
 
 }

@@ -88,17 +88,22 @@ public class MainApplication extends Application {
 
         @Override
         public void handle(long now) {
+            // Pause the game if the pause button is pressed
+            if (mainController.getIsPaused()) {
+                return;
+            }
+            // Inputs keyboards using the function deplacement and creat the functionality of the KeyEvents
+            mainController.getScene().setOnKeyPressed(e -> gameLogic.deplacement(e));
+            mainController.affichage_matrice(gameArea);
+
             if (now - lastUpdate >= 1000000000) {
                 // Mettre à jour le jeu ici
                 lastUpdate = now;
                 System.out.println("Update");
                 //Afficher la matrice et mise à jour de la matrice
                 gameLogic.fall();
-                // Inputs keyboards using the function deplacement and creat the functionality of the KeyEvents
-                mainController.getScene().setOnKeyPressed(e -> gameLogic.deplacement(e));
-
-
                 mainController.affichage_matrice(gameArea);
+                mainController.setScoreLabel(gameLogic.getScore());
 
             }
         }
