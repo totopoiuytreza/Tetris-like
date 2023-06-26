@@ -101,6 +101,11 @@ public class MainApplication extends Application {
                 lastUpdate = now;
                 System.out.println("Update");
                 //Afficher la matrice et mise à jour de la matrice
+                if(gameLogic.getGameOver()){
+                    //TODO : afficher game over et afficher une fenetre pour demander si on veut rejouer avec le score affiché
+                    System.out.println("Game Over");
+                    stop();
+                }
                 gameLogic.fall();
                 mainController.affichage_matrice(gameArea);
                 mainController.setScoreLabel(gameLogic.getScore());

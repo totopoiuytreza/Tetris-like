@@ -18,8 +18,8 @@ public class GameLogic {
 
     public GameLogic(){
         gameArea = new GameArea();
-        block = new Block("I");
-        nextBlock = new Block("I");
+        block = new Block();
+        nextBlock = new Block();
     }
 
     public void addBlockToArea(){
@@ -45,20 +45,33 @@ public class GameLogic {
         return nextBlock;
     }
 
-    public void setNextBlock(Block nextBlock) {
-        this.nextBlock = nextBlock;
-    }
-
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
-    }
-
-    public boolean isGameOver() {
+    public boolean getGameOver() {
         return isGameOver;
     }
 
     public int getScore() {
         return score;
+    }
+
+
+    public boolean checkGameOver(){
+        // Check if the new block can be added to the game area
+        // If not, game over
+        int[][] blockMatrix = block.getMatrix();
+        String[][] gameAreaMatrix = gameArea.getArea();
+
+        // Check if Block is touching something else than 0
+        for(int i = 0; i < blockMatrix.length; i++){
+            for(int j = 0; j < blockMatrix[i].length; j++){
+                if(blockMatrix[i][j] == 1){
+                    if(!gameAreaMatrix[block.getPrevious_x() + i][block.getPrevious_y() + j].equals("0")){
+                        isGameOver = true;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -120,8 +133,9 @@ public class GameLogic {
         // temp is the height of the block
         for(int i = 0; i < blockMatrix.length; i++){
             for(int j = 0; j < blockMatrix[i].length; j++){
-                if(blockMatrix[i][j] == 1){
+                if (blockMatrix[i][j] == 1) {
                     temp = i;
+                    break;
                 }
             }
         }
@@ -136,6 +150,7 @@ public class GameLogic {
         int positionYonGameArea = getBottomOfBlock();
         // Check if bottom of Block is touching bottom of Matrix area
         if(positionYonGameArea == gameArea.height){
+
             block.setTouchedBottom(true);
         }
     }
@@ -145,7 +160,6 @@ public class GameLogic {
             int[][] blockMatrix = block.getMatrix();
             int previous_x = block.getPrevious_x();
             int previous_y = block.getPrevious_y();
-            String color_name = block.getColor_name();
 
             String [][] gameAreaMatrix = gameArea.getArea();
 
@@ -161,9 +175,10 @@ public class GameLogic {
                 boolean isRightWall = false;
                 // Check if block is touching right wall of it's matrix
                 int[][] blockMatrix = block.getMatrix();
-                for(int i = 0; i < blockMatrix.length; i++){
-                    if(blockMatrix[i][blockMatrix[i].length - 1] == 1){
+                for (int[] matrix : blockMatrix) {
+                    if (matrix[matrix.length - 1] == 1) {
                         isRightWall = true;
+                        break;
                     }
                 }
                 // If block is touching right wall, return false
@@ -189,7 +204,6 @@ public class GameLogic {
             int[][] blockMatrix = block.getMatrix();
             int previous_x = block.getPrevious_x();
             int previous_y = block.getPrevious_y();
-            String color_name = block.getColor_name();
 
             String [][] gameAreaMatrix = gameArea.getArea();
 
@@ -205,9 +219,10 @@ public class GameLogic {
                 boolean isLeftWall = false;
                 // Check if block is touching left wall of it's matrix
                 int[][] blockMatrix = block.getMatrix();
-                for(int i = 0; i < blockMatrix.length; i++){
-                    if(blockMatrix[i][0] == 1){
+                for (int[] matrix : blockMatrix) {
+                    if (matrix[0] == 1) {
                         isLeftWall = true;
+                        break;
                     }
                 }
                 // If block is touching left wall, return false
@@ -449,6 +464,7 @@ public class GameLogic {
 
 
     public void movementBlock(String direction){
+
         if(!block.getTouchedBottom()){
             switch(direction){
                 case "down" -> moveDownBlock(1);
@@ -473,9 +489,16 @@ public class GameLogic {
         else{
             clearLine();
             block = nextBlock;
-            nextBlock = new Block("I");
-            addBlockToArea();
+            if(checkGameOver()){
+                System.out.println("Game Over");
+                // TODO : Game Over
+            }
+            else{
+                nextBlock = new Block();
+                addBlockToArea();
+            }
         }
+
     }
 
     public void deplacement(KeyEvent e) {
