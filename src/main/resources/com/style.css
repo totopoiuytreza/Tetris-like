@@ -1,4 +1,4 @@
-.split-pane > .split-pane-divider {
+split-pane > .split-pane-divider {
     -fx-background-color: transparent;
 }
 
@@ -13,3 +13,38 @@
 #GameScreen, #nextPane, #BignextPane {
     -fx-background-color: white;
 }
+
+.table-view {
+    -fx-background-color: #f2f2f2; /* Couleur de fond */
+}
+
+.table-row-cell {
+    -fx-background-color: transparent; /* Couleur de fond des cellules */
+    -fx-text-fill: #333333; /* Couleur du texte */
+    -fx-padding: 0 0 10px 0; /* Marge inférieure pour espacer les lignes */
+}
+
+.table-row-cell:selected {
+    -fx-background-color: transparent; /* Couleur de fond des cellules sélectionnées */
+}
+
+.table-column {
+    -fx-alignment: CENTER_LEFT; /* Alignement du texte dans les colonnes */
+    -fx-padding: 5px; /* Marge intérieure des colonnes */
+    -fx-border-color: #dcdcdc; /* Couleur de la délimitation des colonnes */
+    -fx-border-width: 0 0 0 1px; /* Épaisseur de la délimitation (seulement à gauche) */
+}
+
+.column-header {
+    -fx-background-color: #e0e0e0; /* Couleur de fond de l'en-tête des colonnes */
+    -fx-text-fill: #333333; /* Couleur du texte de l'en-tête des colonnes */
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f5f5f5; /* Couleur des lignes verticales des colonnes */
+}
+
+.table-cell {
+    -fx-alignment: CENTER_LEFT; /* Alignement du texte dans les cellules */
+}
+

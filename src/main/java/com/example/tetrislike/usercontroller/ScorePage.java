@@ -1,5 +1,7 @@
 package com.example.tetrislike.usercontroller;
+import com.example.tetrislike.MainApplication;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,33 +20,12 @@ public class ScorePage extends Application {
     private String[] rankList = new String[10];
     @Override
     public void start(Stage primaryStage) throws Exception {
-        StackPane layout = new StackPane();
-        Scene scene = new Scene(layout, 600, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("Score.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         primaryStage.setTitle("Score Page");
         primaryStage.setResizable(false);
         primaryStage.setFullScreen(false);
-
-        final Label label = new Label("Score Page");
-        label.setFont(new javafx.scene.text.Font("Arial", 20));
-
-        table.setEditable(true);
-
-
-        // Mettre sur l'écran les informations de score stockées dans le fichier Score.json
-
-        // Create a score table with 3 columns: Rank, Name, Score
-        TableColumn rankCol = new TableColumn("Rank");
-        TableColumn nameCol = new TableColumn("Name");
-        TableColumn scoreCol = new TableColumn("Score");
-
-        table.getColumns().addAll(rankCol, nameCol, scoreCol);
-
-        final VBox vbox = new VBox();
-        vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10, 0, 0, 10));
-        vbox.getChildren().addAll(label, table);
-
-        ((StackPane) scene.getRoot()).getChildren().addAll(vbox);
+        primaryStage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/images/logo.png"));
 
 
 
