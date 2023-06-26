@@ -1,15 +1,17 @@
 package com.example.tetrislike;
-import com.example.tetrislike.logic.*;
-import com.example.tetrislike.usercontroller.ScorePage;
 
+import com.example.tetrislike.logic.Block;
+import com.example.tetrislike.logic.GameArea;
+import com.example.tetrislike.usercontroller.Score;
+import com.example.tetrislike.usercontroller.ScorePage;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -36,6 +38,23 @@ public class MainController {
 
     @FXML
     private AnchorPane nextPane;
+
+    @FXML
+    private TableView<Score> tableView;
+
+
+    public void getTable(String[] scoreList, String[] nameList, String[] rankList) {
+        tableView.setEditable(true);
+        // Height of cells
+        tableView.setFixedCellSize(25);
+        // Add the data to the table
+        for(int i = 0; i < 10; i++){
+            rankList[i] = Integer.toString(i + 1);
+            System.out.println(rankList[i] + " " + nameList[i] + " " + scoreList[i]);
+            Score score = new Score(rankList[i], nameList[i], scoreList[i]);
+            tableView.getItems().add(score);
+        }
+    }
 
     @FXML
     protected void onTestButtonClick() {

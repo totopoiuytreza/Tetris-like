@@ -1,16 +1,16 @@
 package com.example.tetrislike;
 
-import com.example.tetrislike.usercontroller.ScorePage;
+import com.example.tetrislike.logic.Block;
+import com.example.tetrislike.logic.GameArea;
+import com.example.tetrislike.logic.GameLogic;
+import com.example.tetrislike.usercontroller.PopUp;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.example.tetrislike.logic.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -107,9 +107,10 @@ public class MainApplication extends Application {
                 if(gameLogic.getGameOver()){
                     //TODO : afficher game over et afficher une fenetre pour demander si on veut rejouer avec le score affiché
                     System.out.println("Game Over");
-                    ScorePage scorePage = new ScorePage();
+                    PopUp scorePage = new PopUp();
                     try {
                         scorePage.start(new Stage());
+                        scorePage.setScore(gameLogic.getScore());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
