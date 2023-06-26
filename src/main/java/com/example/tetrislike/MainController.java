@@ -2,6 +2,8 @@ package com.example.tetrislike;
 import com.example.tetrislike.logic.*;
 import com.example.tetrislike.usercontroller.ScorePage;
 
+import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +17,9 @@ import javafx.stage.Stage;
 
 public class MainController {
     private boolean isPaused = false;
+
+
+    private AnimationTimer timer;
     @FXML
     private Label scoreLabel;
 
@@ -26,6 +31,8 @@ public class MainController {
 
     @FXML
     private AnchorPane gamePane;
+    @FXML
+    private Button startButton;
 
     @FXML
     private AnchorPane nextPane;
@@ -79,8 +86,9 @@ public class MainController {
                 Rectangle rectangle = new Rectangle();
                 rectangle.setHeight(37);
                 rectangle.setWidth(37);
-                rectangle.setFill(javafx.scene.paint.Color.WHITE);
-                rectangle.setStroke(javafx.scene.paint.Color.BLACK);
+                rectangle.setFill(javafx.scene.paint.Color.TRANSPARENT);
+                //Color of the border of the rectangle #dcdcdc
+                rectangle.setStroke(javafx.scene.paint.Color.web("#dcdcdc"));
                 rectangle.setStrokeWidth(1);
                 AnchorPane.setTopAnchor(rectangle, i * 37.0);
                 AnchorPane.setLeftAnchor(rectangle, j * 37.0);
@@ -92,6 +100,7 @@ public class MainController {
     @FXML
     public void affichage_matrice(GameArea gameArea) {
         gamePane.getChildren().clear();
+        setGameArea(gameArea);
         // Affichage de la matrice sur le gamePane
         for (int i = 0; i < gameArea.height; i++) {
             for (int j = 0; j < gameArea.width; j++) {
@@ -176,6 +185,36 @@ public class MainController {
         return isPaused;
     }
 
+    public void initialize(GameArea gameArea) {
+        // Créer les boutons "Start" et "Score"
+        startButton = new Button("Start");
+        startButton.setLayoutX(200.0);
+        startButton.setLayoutY(350.0);
+        startButton.setPrefWidth(200.0);
+        startButton.setPrefHeight(100.0);
+        startButton.setOnAction(this::onStartButtonClick);
 
+
+
+        // Ajouter les boutons à gamePane
+        gamePane.getChildren().addAll(startButton);
+
+
+        // Activer le bouton Start lorsque le jeu est prêt à être lancé
+        //gameArea.setOnGameReady(() -> startButton.setDisable(false));
+    }
+
+    public void onStartButtonClick(ActionEvent event) {
+        // Action à exécuter lors du clic sur le bouton Start
+        // Par exemple, lancer le jeu en activant le timer
+        // Désactiver le bouton Start au démarrage
+        startButton.setDisable(true);
+        timer.start(); // Démarrer le timer ici
+    }
+
+
+    public void setTimer(AnimationTimer timer) {
+        this.timer = timer;
+    }
 
 }

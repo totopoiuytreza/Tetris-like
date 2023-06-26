@@ -53,7 +53,9 @@ public class MainApplication extends Application {
 
 
         AnimationTimer timer = new Timer(gameArea, gameLogic ,mainController);
-        timer.start();
+        mainController.setTimer(timer);
+        mainController.initialize(gameArea);
+        //timer.start();
 
         stage.setScene(scene);
         stage.show();
