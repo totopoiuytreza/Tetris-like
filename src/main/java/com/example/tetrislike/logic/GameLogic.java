@@ -161,16 +161,24 @@ public class GameLogic {
             int previous_x = block.getPrevious_x();
             int previous_y = block.getPrevious_y();
 
+            previous_y += 1;
             String [][] gameAreaMatrix = gameArea.getArea();
 
-            // Check if right of Block is something else than 0
+            // Check if Block is touching something else than 0
             for(int i = 0; i < blockMatrix.length; i++){
-                if(!gameAreaMatrix[previous_x + i][previous_y + blockMatrix[i].length].equals("0")){
-                    return false;
+                for(int j = 0; j < blockMatrix[i].length; j++){
+                    if(blockMatrix[i][j] == 1){
+                        if(!gameAreaMatrix[previous_x + i][previous_y + j].equals("0")){
+                            previous_y -= 1;
+                            return false;
+                        }
+                    }
                 }
             }
+            previous_y -= 1;
             return true;
         } catch (Exception e){
+            System.out.println(e);
             if(e instanceof ArrayIndexOutOfBoundsException){
                 boolean isRightWall = false;
                 // Check if block is touching right wall of it's matrix
@@ -204,17 +212,25 @@ public class GameLogic {
             int[][] blockMatrix = block.getMatrix();
             int previous_x = block.getPrevious_x();
             int previous_y = block.getPrevious_y();
+            previous_y -= 1;
 
             String [][] gameAreaMatrix = gameArea.getArea();
 
-            // Check if left of Block is something else than 0
+            // Check if Block is touching something else than 0
             for(int i = 0; i < blockMatrix.length; i++){
-                if(!gameAreaMatrix[previous_x + i][previous_y - 1].equals("0")){
-                    return false;
+                for(int j = 0; j < blockMatrix[i].length; j++){
+                    if(blockMatrix[i][j] == 1){
+                        if(!gameAreaMatrix[previous_x + i][previous_y + j].equals("0")){
+                            previous_y += 1;
+                            return false;
+                        }
+                    }
                 }
             }
+            previous_y += 1;
             return true;
         } catch (Exception e){
+            System.out.println(e);
             if(e instanceof ArrayIndexOutOfBoundsException){
                 boolean isLeftWall = false;
                 // Check if block is touching left wall of it's matrix
@@ -344,43 +360,50 @@ public class GameLogic {
     }
 
     public void moveRightBlock(){
-        if(checkCanRight()){
-            try{
-                // Clear Block from Matrix area
-                clearBlock();
+        System.out.println(checkCanRight());
+        try{
+            // Clear Block from Matrix area
+            clearBlock();
 
+            if(checkCanRight()){
                 // Move Block to Right
                 block.setPreviousY(block.getPrevious_y() + 1);
 
                 // Move Block to Matrix area
                 placeBlock();
-            } catch (Exception e){
-                System.out.println("Movement not possible");
-                block.setPreviousY(block.getPrevious_y() - 1);
-                clearBlock();
-                placeBlock();
             }
+            placeBlock();
+
+        } catch (Exception e){
+            System.out.println("Movement not possible");
+            block.setPreviousY(block.getPrevious_y() - 1);
+            clearBlock();
+            placeBlock();
         }
     }
 
     public void moveLeftBlock(){
-        if(checkCanLeft()){
-            try{
-                // Clear Block from Matrix area
-                clearBlock();
+        System.out.println(checkCanLeft());
 
+        try{
+            // Clear Block from Matrix area
+            clearBlock();
+
+            if(checkCanLeft()){
                 // Move Block to Left
                 block.setPreviousY(block.getPrevious_y() -1);
 
                 // Move Block to Matrix area
                 placeBlock();
-            } catch (Exception e){
-                System.out.println("Movement not possible");
-                block.setPreviousY(block.getPrevious_y() + 1);
-                clearBlock();
-                placeBlock();
             }
+            placeBlock();
+        } catch (Exception e){
+            System.out.println("Movement not possible");
+            block.setPreviousY(block.getPrevious_y() + 1);
+            clearBlock();
+            placeBlock();
         }
+
     }
 
     public void rotateRBlock(){
