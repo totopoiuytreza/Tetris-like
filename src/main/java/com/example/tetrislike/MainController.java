@@ -25,6 +25,9 @@ public class MainController {
     private AnchorPane gamePane;
 
     @FXML
+    private AnchorPane nextPane;
+
+    @FXML
     protected void onTestButtonClick() {
         testButton.setText("Test");
         System.out.println("Test button clicked");
@@ -108,6 +111,43 @@ public class MainController {
                 }
             }
         }
+    }
+
+    public void affichage_nextblock(Block nextBlock) {
+        nextPane.getChildren().clear();
+        // Affichage de nextBlock sur le nextPane
+        for (int i = 0; i < nextBlock.getMatrix()[0].length; i++) {
+            for (int j = 0; j < nextBlock.getMatrix()[0].length; j++) {
+                if (nextBlock.getMatrix()[i][j] != 0) {
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.setHeight(40);
+                    rectangle.setWidth(40);
+                    //affichage de la couleur
+                    switch (nextBlock.getColorName()) {
+                        case "R" -> rectangle.setFill(javafx.scene.paint.Color.RED);
+                        case "B" -> rectangle.setFill(javafx.scene.paint.Color.BLUE);
+                        case "G" -> rectangle.setFill(javafx.scene.paint.Color.GREEN);
+                        case "Y" -> rectangle.setFill(javafx.scene.paint.Color.YELLOW);
+                        case "P" -> rectangle.setFill(javafx.scene.paint.Color.PURPLE);
+                        case "O" -> rectangle.setFill(javafx.scene.paint.Color.ORANGE);
+                        case "Pin" -> rectangle.setFill(javafx.scene.paint.Color.PINK);
+                        case "Grey" -> rectangle.setFill(javafx.scene.paint.Color.GREY);
+                        case "C" -> rectangle.setFill(javafx.scene.paint.Color.CYAN);
+                        case "Brown" -> rectangle.setFill(javafx.scene.paint.Color.BROWN);
+                        case "Black" -> rectangle.setFill(javafx.scene.paint.Color.BLACK);
+                        default -> rectangle.setFill(javafx.scene.paint.Color.WHITE);
+                    }
+                    //rectangle.setFill(javafx.scene.paint.Color.BLACK);
+                    rectangle.setStroke(javafx.scene.paint.Color.BLACK);
+                    rectangle.setStrokeWidth(1);
+                    AnchorPane.setTopAnchor(rectangle, i * 37.0);
+                    AnchorPane.setLeftAnchor(rectangle, j * 37.0);
+                    nextPane.getChildren().add(rectangle);
+                }
+            }
+        }
+
+
     }
 
     public Scene getScene() {

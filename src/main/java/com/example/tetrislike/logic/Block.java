@@ -115,8 +115,8 @@ public final class Block extends Group implements Cloneable {
         return matrix;
     }
 
-    public Color getColor(){
-        return color;
+    public String getColorName(){
+        return color_name;
     }
 
     public void setPreviousX(int x){

@@ -103,6 +103,7 @@ public class MainApplication extends Application {
                 //Afficher la matrice et mise à jour de la matrice
                 gameLogic.fall();
                 mainController.affichage_matrice(gameArea);
+                mainController.affichage_nextblock(gameLogic.getNextBlock());
                 mainController.setScoreLabel(gameLogic.getScore());
 
             }
