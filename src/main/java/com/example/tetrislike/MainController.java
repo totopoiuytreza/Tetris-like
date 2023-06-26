@@ -85,8 +85,8 @@ public class MainController {
             for (int j = 0; j < gameArea.width; j++) {
                 if (gameArea.getArea()[i][j] != "0") {
                     Rectangle rectangle = new Rectangle();
-                    rectangle.setHeight(40);
-                    rectangle.setWidth(40);
+                    rectangle.setHeight(37);
+                    rectangle.setWidth(37);
                     //affichage de la couleur
                     switch (gameArea.getArea()[i][j]) {
                         case "R" -> rectangle.setFill(javafx.scene.paint.Color.RED);
@@ -120,8 +120,8 @@ public class MainController {
             for (int j = 0; j < nextBlock.getMatrix()[0].length; j++) {
                 if (nextBlock.getMatrix()[i][j] != 0) {
                     Rectangle rectangle = new Rectangle();
-                    rectangle.setHeight(40);
-                    rectangle.setWidth(40);
+                    rectangle.setHeight(37);
+                    rectangle.setWidth(37);
                     //affichage de la couleur
                     switch (nextBlock.getColorName()) {
                         case "R" -> rectangle.setFill(javafx.scene.paint.Color.RED);
