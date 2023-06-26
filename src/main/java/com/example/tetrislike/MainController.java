@@ -1,5 +1,6 @@
 package com.example.tetrislike;
 import com.example.tetrislike.logic.*;
+import com.example.tetrislike.usercontroller.ScorePage;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -9,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
 
 public class MainController {
     private boolean isPaused = false;
@@ -41,6 +44,15 @@ public class MainController {
 
         // Add the Pane to the AnchorPane
         gamePane.getChildren().add(redPane);
+
+        // Open ScorePage
+        ScorePage scorePage = new ScorePage();
+        try {
+            scorePage.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     @FXML
     protected void onPauseButtonClick() {

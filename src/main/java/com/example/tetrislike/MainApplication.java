@@ -1,5 +1,6 @@
 package com.example.tetrislike;
 
+import com.example.tetrislike.usercontroller.ScorePage;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -104,6 +105,12 @@ public class MainApplication extends Application {
                 if(gameLogic.getGameOver()){
                     //TODO : afficher game over et afficher une fenetre pour demander si on veut rejouer avec le score affiché
                     System.out.println("Game Over");
+                    ScorePage scorePage = new ScorePage();
+                    try {
+                        scorePage.start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     stop();
                 }
                 gameLogic.fall();
