@@ -10,10 +10,6 @@
     -fx-background-color: #5f5f5f;
 }
 
-#GameScreen {
-    -fx-background-color: white;
-}
-
-#nextPane {
+#GameScreen, #nextPane, #BignextPane {
     -fx-background-color: white;
 }

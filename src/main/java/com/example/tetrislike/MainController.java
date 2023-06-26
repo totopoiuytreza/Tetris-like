@@ -140,8 +140,8 @@ public class MainController {
                     //rectangle.setFill(javafx.scene.paint.Color.BLACK);
                     rectangle.setStroke(javafx.scene.paint.Color.BLACK);
                     rectangle.setStrokeWidth(1);
-                    AnchorPane.setTopAnchor(rectangle, i * 37.0);
-                    AnchorPane.setLeftAnchor(rectangle, j * 37.0);
+                    AnchorPane.setTopAnchor(rectangle, (i) * 37.0); // Ajouter une valeur de décalage en haut
+                    AnchorPane.setLeftAnchor(rectangle, (j) * 37.0); // Ajouter une valeur de décalage à gauche
                     nextPane.getChildren().add(rectangle);
                 }
             }
