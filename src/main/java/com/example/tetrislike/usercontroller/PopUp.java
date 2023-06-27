@@ -67,5 +67,6 @@ public class PopUp extends Application {
 
     public void setScore(int score){
         scoreText.setText("Score: " + score);
+        this.score = score;
     }
 }
