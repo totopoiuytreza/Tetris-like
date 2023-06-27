@@ -11,11 +11,15 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 
 public class MainController {
@@ -42,12 +46,30 @@ public class MainController {
 
     @FXML
     private TableView<Score> tableView;
+    @FXML
+    private TableColumn<Score, String> rankCol;
+    @FXML
+    private TableColumn<Score, String> nameCol;
+    @FXML
+    private TableColumn<Score, String> scoreCol;
 
 
     public void getTable(String[] scoreList, String[] nameList, String[] rankList) {
         tableView.setEditable(true);
         // Height of cells
-        tableView.setFixedCellSize(25);
+        tableView.setFixedCellSize(50);
+
+        // Size of texts and center them
+        tableView.setStyle("-fx-font-size: 22px;");
+        rankCol.setStyle("-fx-alignment: CENTER;");
+        nameCol.setStyle("-fx-alignment: CENTER;");
+        scoreCol.setStyle("-fx-alignment: CENTER;");
+
+        // Horizontal Borders of the columns
+        rankCol.setStyle("-fx-border-width: 0.5px; -fx-border-color: gray;");
+        nameCol.setStyle("-fx-border-width: 0.5px; -fx-border-color: gray;");
+        scoreCol.setStyle("-fx-border-width: 0.5px; -fx-border-color: gray;");
+
         // Add the data to the table
         for(int i = 0; i < 10; i++){
             rankList[i] = Integer.toString(i + 1);
@@ -55,6 +77,29 @@ public class MainController {
             Score score = new Score(rankList[i], nameList[i], scoreList[i]);
             tableView.getItems().add(score);
         }
+    }
+
+    public void writeScore(String[] score) { // score = [name, score]
+        String path = "src/main/java/com/example/tetrislike/usercontroller/Score.json";
+        // Write in Score.json
+        // Read Score.json
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){
+            // Write in Score.json
+            String line = "{\"name\": " + score[0] + ", \"score\": " + score[1] + "}";
+            // Delete last line
+
+
+
+
+
+            bw.newLine();
+            bw.write("]");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     @FXML

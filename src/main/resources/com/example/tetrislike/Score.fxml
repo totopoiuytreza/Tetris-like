@@ -13,19 +13,19 @@
    <children>
       <TableView fx:id="tableView" prefHeight="600.0" prefWidth="600.0" >
         <columns>
-          <TableColumn prefWidth="120.66662347316742" resizable="false" text="Rank">
+          <TableColumn fx:id="rankCol" prefWidth="120.66662347316742" resizable="false" text="Rank">
             <cellValueFactory>
               <PropertyValueFactory property="rank" />
             </cellValueFactory>
           </TableColumn>
 
-          <TableColumn prefWidth="245.99999237060547" resizable="false" text="Score">
+          <TableColumn fx:id="scoreCol" prefWidth="245.99999237060547" resizable="false" text="Score">
             <cellValueFactory>
               <PropertyValueFactory property="score" />
             </cellValueFactory>
             </TableColumn>
 
-            <TableColumn prefWidth="236.00003051757812" resizable="false" text="Name">
+            <TableColumn fx:id="nameCol" prefWidth="236.00003051757812" resizable="false" text="Name">
             <cellValueFactory>
               <PropertyValueFactory property="name" />
             </cellValueFactory>
