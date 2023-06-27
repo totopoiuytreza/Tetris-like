@@ -2,7 +2,6 @@ package com.example.tetrislike;
 
 import com.example.tetrislike.logic.Block;
 import com.example.tetrislike.logic.GameArea;
-import com.example.tetrislike.logic.GameLogic;
 import com.example.tetrislike.usercontroller.Score;
 import com.example.tetrislike.usercontroller.ScorePage;
 import javafx.animation.AnimationTimer;
@@ -153,9 +152,6 @@ public class MainController {
         System.out.println("Pause button clicked");
     }
 
-    public void setScoreLabel(String score) {
-        scoreLabel.setText(score);
-    }
 
     @FXML
     public void setGameArea(GameArea gameArea) {
@@ -291,14 +287,6 @@ public class MainController {
         // Désactiver le bouton Start au démarrage
         startButton.setDisable(true);
         timer.start(); // Démarrer le timer ici
-    }
-
-    public void resetGame(GameLogic gameLogic) {
-        // Réinitialisez votre zone de jeu
-        gameLogic.reset(); // Réinitialisez votre logique de jeu
-        gameLogic.addBlockToArea(); // Ajoutez un nouveau bloc à la zone de jeu
-        setScoreLabel(0); // Réinitialisez l'étiquette du score
-        // Autres opérations de réinitialisation si nécessaire
     }
 
 
