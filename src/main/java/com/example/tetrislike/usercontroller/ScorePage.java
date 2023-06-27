@@ -54,30 +54,34 @@ public class ScorePage extends Application {
             while ((line = reader.readLine()) != null) {
                 jsonData.add(line);
             }
-
-            for (String s : jsonData) {
-                // If the line different than "[" and "]"
-                if(!s.equals("[") && !s.equals("]")) {
-                    // Split the line by ","
-                    String[] parts = s.split(",");
-                    for(String p : parts){
-                        String part = p.split(":")[1];
-                        // If the line contains "
-                        if(part.contains("\"")){
-                            // Remove the "
-                            part = part.replace("\"", "");
-                            nameList.add(part);
-                        }
-                        // If the line contains }
-                        if(part.contains("}")){
-                            // Remove the }
-                            part = part.replace("}", "");
-                            part = part.replace(" ", "");
-                            scoreList.add(part);
+            try{
+                for (String s : jsonData) {
+                    // If the line different than "[" and "]"
+                    if(!s.equals("[") && !s.equals("]")) {
+                        // Split the line by ","
+                        String[] parts = s.split(",");
+                        for(String p : parts){
+                            String part = p.split(":")[1];
+                            // If the line contains "
+                            if(part.contains("\"")){
+                                // Remove the "
+                                part = part.replace("\"", "");
+                                nameList.add(part);
+                            }
+                            // If the line contains }
+                            if(part.contains("}")){
+                                // Remove the }
+                                part = part.replace("}", "");
+                                part = part.replace(" ", "");
+                                scoreList.add(part);
+                            }
                         }
                     }
                 }
+            } catch (Exception e){
+                e.printStackTrace();
             }
+
 
             // Sort the list
             for(int i = 0; i < scoreList.size(); i++){

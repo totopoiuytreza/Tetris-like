@@ -18,8 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.*;
 
 
 public class MainController {
@@ -79,21 +78,38 @@ public class MainController {
         }
     }
 
-    public void writeScore(String[] score) { // score = [name, score]
+    public void writeScore(String score) {
         String path = "src/main/java/com/example/tetrislike/usercontroller/Score.json";
+        String tempPath = "src/main/java/com/example/tetrislike/usercontroller/TempScore.json";
+        File file = new File(path);
+        File tempFile = new File(tempPath);
         // Write in Score.json
         // Read Score.json
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){
-            // Write in Score.json
-            String line = "{\"name\": " + score[0] + ", \"score\": " + score[1] + "}";
-            // Delete last line
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
+             BufferedReader reader = new BufferedReader(new FileReader(file))){
 
+            String currentLine;
 
-
-
-
-            bw.newLine();
-            bw.write("]");
+            // Read each line from the original file
+            while ((currentLine = reader.readLine()) != null) {
+                // If the line does not match the line to be deleted, write it to the temporary file
+                if (!currentLine.equals("]")) {
+                    bw.write(currentLine);
+                    bw.newLine();
+                }
+                else{
+                    bw.write(",");
+                    bw.newLine();
+                    bw.write(score);
+                    bw.newLine();
+                    bw.write("]");
+                }
+            }
+            reader.close();
+            bw.close();
+            // Replace the original file with the temporary file
+            file.delete();
+            tempFile.renameTo(file);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,8 +120,7 @@ public class MainController {
 
     @FXML
     protected void onTestButtonClick() {
-        testButton.setText("Test");
-        System.out.println("Test button clicked");
+        testButton.setText("Scores");
         Pane redPane = new Pane();
         redPane.setStyle("-fx-background-color: red;");
         redPane.prefHeight(100);

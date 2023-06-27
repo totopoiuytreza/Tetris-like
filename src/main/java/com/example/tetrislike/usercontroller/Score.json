@@ -1,7 +1,13 @@
 [
-  {"name": "John", "score": 90},
-    {"name": "Peter", "score": 80},
-    {"name": "Mary", "score": 100},
-    {"name": "Jane", "score": 95},
+  {"name": "John", "score": 90}
+,
+    {"name": "Peter", "score": 80}
+,
+    {"name": "Mary", "score": 100}
+,
+    {"name": "Jane", "score": 95}
+,
     {"name": "Tony", "score": 85}
+,
+{"name":"azeaze","score":0}
 ]
