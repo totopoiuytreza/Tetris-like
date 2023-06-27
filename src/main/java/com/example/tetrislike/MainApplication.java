@@ -6,19 +6,18 @@ import com.example.tetrislike.logic.GameLogic;
 import com.example.tetrislike.usercontroller.PopUp;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainApplication extends Application {
+    Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
+        this.stage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("TEST.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 800);
         stage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/images/logo.png"));
@@ -40,22 +39,10 @@ public class MainApplication extends Application {
         gameLogic.setGameArea(gameArea);
         Block block = new Block();
         gameLogic.setBlock(block);
-        gameLogic.addBlockToArea();
-        /*
-        for(int i = 0; i < 18; i++){
-            gameLogic.getGameArea().movementBlock(block, "down");
-            System.out.println(gameLogic.getGameArea());
-        }
-        gameLogic.getGameArea().movementBlock(block, "down");
-        System.out.println(gameLogic.getGameArea());
-        */
-
-
 
         AnimationTimer timer = new Timer(gameArea, gameLogic ,mainController);
         mainController.setTimer(timer);
         mainController.initialize(gameArea);
-        //timer.start();
 
         stage.setScene(scene);
         stage.show();
@@ -105,7 +92,13 @@ public class MainApplication extends Application {
                         e.printStackTrace();
                     }
                     stop();
-                    //mainController.resetGame(gameLogic);
+                    try {
+                        MainApplication.this.start(stage);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+
                 }
                 gameLogic.fall();
                 mainController.affichage_matrice(gameArea);
