@@ -85,17 +85,18 @@ public class MainApplication extends Application {
                     //TODO : afficher game over et afficher une fenetre pour demander si on veut rejouer avec le score affiché
                     System.out.println("Game Over");
                     PopUp scorePage = new PopUp();
-                    try {
-                        scorePage.start(new Stage());
-                        scorePage.setScore(gameLogic.getScore());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    scorePage.setScore(gameLogic.getScore());
+
                     stop();
                     try {
                         MainApplication.this.start(stage);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
+                    }
+                    try {
+                        scorePage.start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
 
