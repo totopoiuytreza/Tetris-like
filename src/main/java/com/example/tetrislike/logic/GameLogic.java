@@ -10,8 +10,6 @@ public class GameLogic {
     private Block block;
     private Block nextBlock;
 
-    private boolean isPaused = false;
-
     private int score = 0;
 
     private boolean isGameOver = false;
@@ -535,6 +533,14 @@ public class GameLogic {
             case A -> movementBlock("rotateL");
             case Z -> instantFall();
         }
+    }
+
+    public void reset() {
+        gameArea.reset(); // Réinitialiser la zone de jeu
+        block = new Block(); // Créer un nouveau bloc
+        nextBlock = new Block(); // Générer le prochain bloc
+        score = 0; // Réinitialiser le score
+        isGameOver = false; // Réinitialiser le flag de game over
     }
 
 }

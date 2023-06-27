@@ -61,17 +61,7 @@ public class MainApplication extends Application {
         stage.show();
 
     }
-    private void updateBlockMatrix(ObservableList<String[]> blockMatrix,String[][] newMatrix) {
-        System.out.println("updateBlockMatrix");
-        blockMatrix.clear(); // Effacer l'ancienne matrice
 
-
-        // Convertir la matrice en une liste de tableaux de chaînes de caractères
-        List<String[]> matrixList = Arrays.asList(newMatrix);
-
-        // Ajouter la liste à l'ObservableList
-        blockMatrix.addAll(matrixList);
-    }
 
     private class Timer extends AnimationTimer {
         private GameArea gameArea = new GameArea();
@@ -115,6 +105,7 @@ public class MainApplication extends Application {
                         e.printStackTrace();
                     }
                     stop();
+                    //mainController.resetGame(gameLogic);
                 }
                 gameLogic.fall();
                 mainController.affichage_matrice(gameArea);

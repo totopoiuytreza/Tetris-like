@@ -2,6 +2,7 @@ package com.example.tetrislike;
 
 import com.example.tetrislike.logic.Block;
 import com.example.tetrislike.logic.GameArea;
+import com.example.tetrislike.logic.GameLogic;
 import com.example.tetrislike.usercontroller.Score;
 import com.example.tetrislike.usercontroller.ScorePage;
 import javafx.animation.AnimationTimer;
@@ -207,17 +208,18 @@ public class MainController {
     public void initialize(GameArea gameArea) {
         // Créer les boutons "Start" et "Score"
         startButton = new Button("Start");
-        startButton.setLayoutX(200.0);
-        startButton.setLayoutY(350.0);
         startButton.setPrefWidth(200.0);
         startButton.setPrefHeight(100.0);
         startButton.setOnAction(this::onStartButtonClick);
 
-
+        double gamePaneWidth = 444.0;
+        double buttonWidth = startButton.getPrefWidth();
+        double buttonX = (gamePaneWidth - buttonWidth) / 2.0;
+        startButton.setLayoutX(buttonX);
+        startButton.setLayoutY(350.0);
 
         // Ajouter les boutons à gamePane
         gamePane.getChildren().addAll(startButton);
-
 
         // Activer le bouton Start lorsque le jeu est prêt à être lancé
         //gameArea.setOnGameReady(() -> startButton.setDisable(false));
@@ -230,6 +232,15 @@ public class MainController {
         startButton.setDisable(true);
         timer.start(); // Démarrer le timer ici
     }
+
+    public void resetGame(GameLogic gameLogic) {
+        // Réinitialisez votre zone de jeu
+        gameLogic.reset(); // Réinitialisez votre logique de jeu
+        gameLogic.addBlockToArea(); // Ajoutez un nouveau bloc à la zone de jeu
+        setScoreLabel(0); // Réinitialisez l'étiquette du score
+        // Autres opérations de réinitialisation si nécessaire
+    }
+
 
 
     public void setTimer(AnimationTimer timer) {
